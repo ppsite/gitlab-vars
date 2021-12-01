@@ -18,6 +18,8 @@ simplely download the binary and placed it in `$PATH`. the file name, whatever y
 
 > Note: access token is **`sensitive`**
 
+> vars refers: [project variables](https://docs.gitlab.com/ee/api/project_level_variables.html#list-project-variables)
+
 ```yaml
 gitlab:
   private_token: <access token>

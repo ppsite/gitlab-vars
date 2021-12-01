@@ -58,6 +58,7 @@ var rootCmd = &cobra.Command{
       fmt.Println("read config error:", err)
       return
     }
+
     // init gitlab client
     gl := gitlab.NewGitlab(config.Gitlab.Server, "/api/v4", config.Gitlab.PrivateToken, false)
 
@@ -82,6 +83,8 @@ var rootCmd = &cobra.Command{
           }
           if createdVar.Key != item.Key {
             fmt.Println("[", item.Key, "]", "may exsit")
+          } else {
+            fmt.Println("[", item.Key, "]", "created")
           }
         }
       default:    // list

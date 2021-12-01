@@ -46,43 +46,6 @@ func (g *Gitlab) ResourceUrl(path string, params map[string]string) *url.URL {
 	return u
 }
 
-func (g *Gitlab) Request(method, url string, payload []byte) ([]byte, error) {
-  var req *http.Request
-	var err error
-
-  if payload == nil {
-    req, err = http.NewRequest(method, url, nil)
-  }else{
-    req, err = http.NewRequest(method, url, bytes.NewBuffer(payload))
-  }
-
-  if err != nil {
-    fmt.Println(err)
-    return nil, err
-  }
-
-  req.Header.Add("PRIVATE-TOKEN", g.Token)
-  if method == "POST" || method == "PUT" {
-		req.Header.Add("Content-Type", "application/json")
-	}
-
-  res, err := g.Client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return nil, err
-  }
-  defer res.Body.Close()
-
-  body, err := ioutil.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return nil, err
-  }
-
-  fmt.Println(string(body))
-  return body, err
-}
-
 
 func (g *Gitlab) execRequest(method, url string, body []byte) (*http.Response, error) {
 	var req *http.Request
